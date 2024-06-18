@@ -55,24 +55,24 @@ def save_results_to_file(start_time, end_time, cpu_info, gpu_info, output_file, 
                 f.write(f"Epoch {info['epoch']}: Accuracy: {info['accuracy']:.4f}, Time: {info['time']:.2f} seconds\n")
 
 def train_fashion_mnist(no_training_samples=5000, no_testing_samples=1000, motif_size=1, hidden_sizes=[300, 300], epochs=30, learning_rate=0.05, batch_size=40, zeta=0.1):
-    # 数据准备
+    # Data preparation
     X_train, y_train, X_test, y_test = load_fashion_mnist_data(no_training_samples, no_testing_samples)
 
-    # 数据标准化
+    # Data Standardization
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-    # One-hot 编码
+    # One-hot Encoding
     onehot_encoder = OneHotEncoder(sparse_output=False)
     y_train = onehot_encoder.fit_transform(y_train.reshape(-1, 1))
     y_test = onehot_encoder.transform(y_test.reshape(-1, 1))
 
-    # 模型参数
+    # Set the parameters
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
 
-    # 初始化和训练模型
+    # Initialize and train the model
     nn = MotifBasedSparseNN(input_size, motif_size, hidden_sizes, output_size, init_network='uniform', epsilon=0.1, activation_fn=Relu(), loss_fn=CrossEntropy())
 
     best_accuracy = 0
