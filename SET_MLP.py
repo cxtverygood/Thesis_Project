@@ -64,7 +64,7 @@ class MotifBasedSparseNN:
     def __init__(self, input_size, motif_size, hidden_sizes, output_size, init_network='uniform', epsilon=20, zeta=0.1, activation_fn=Relu(), loss_fn=CrossEntropy(), init_density=0.1):
         self.motif_size = motif_size
         self.epsilon = epsilon
-        self.zeta = zeta  # 添加 zeta 变量
+        self.zeta = zeta  
         self.activation_fn = activation_fn
         self.loss_fn = loss_fn
         self.learning_rate = None
