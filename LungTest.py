@@ -50,15 +50,15 @@ def save_results_to_file(start_time, end_time, cpu_info, gpu_info, output_file, 
                 f.write(f"Epoch {info['epoch']}: Accuracy: {info['accuracy']:.4f}, Time: {info['time']:.2f} seconds\n")
 
 def train_lung(no_training_samples=None, no_testing_samples=None, motif_size=1, hidden_sizes=[300, 300], epochs=30, learning_rate=0.05, batch_size=40, zeta=0.1):
-    # 数据准备
+    # Data preparation
     X, y = load_lung_data()
     X_train, X_test, y_train, y_test = train_test_split_normalize(X, y)
 
-    # 模型参数
+    # Set model parameters
     input_size = X_train.shape[1]
     output_size = y_train.shape[1]
 
-    # 初始化和训练模型
+    # Initialize and train the model
     nn = MotifBasedSparseNN(input_size, motif_size, hidden_sizes, output_size, init_network='uniform', epsilon=0.1, activation_fn=Relu(), loss_fn=CrossEntropy())
 
     best_accuracy = 0
@@ -69,7 +69,7 @@ def train_lung(no_training_samples=None, no_testing_samples=None, motif_size=1, 
         nn.train_epoch(X_train, y_train, learning_rate, batch_size, zeta)
         epoch_end_time = time.time()
 
-        # 在测试集上进行预测
+        # Make predictions on the test set
         _, A_list, _ = nn.forward(X_test)
         current_accuracy = nn.accuracy(y_test, A_list[-1])
 
