@@ -49,7 +49,7 @@ def save_results_to_file(start_time, end_time, cpu_info, gpu_info, output_file, 
             for info in epoch_info:
                 f.write(f"Epoch {info['epoch']}: Accuracy: {info['accuracy']:.4f}, Time: {info['time']:.2f} seconds\n")
 
-def train_lung(no_training_samples=None, no_testing_samples=None, motif_size=1, hidden_sizes=[300, 300], epochs=30, learning_rate=0.05, batch_size=40, zeta=0.1):
+def train_lung(no_training_samples=None, no_testing_samples=None, motif_size=1, hidden_sizes=[3000,3000, 3000], epochs=300, learning_rate=0.05, batch_size=40, zeta=0.1):
     # Data preparation
     X, y = load_lung_data()
     X_train, X_test, y_train, y_test = train_test_split_normalize(X, y)
