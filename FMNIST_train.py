@@ -54,7 +54,7 @@ def save_results_to_file(start_time, end_time, cpu_info, gpu_info, output_file, 
             for info in epoch_info:
                 f.write(f"Epoch {info['epoch']}: Accuracy: {info['accuracy']:.4f}, Time: {info['time']:.2f} seconds\n")
 
-def train_fashion_mnist(no_training_samples=5000, no_testing_samples=1000, motif_size=1, hidden_sizes=[300, 300], epochs=30, learning_rate=0.05, batch_size=40, zeta=0.1):
+def train_fashion_mnist(no_training_samples=5000, no_testing_samples=1000, motif_size=1, hidden_sizes=[3000,3000 3000], epochs=300, learning_rate=0.05, batch_size=40, zeta=0.1):
     # Data preparation
     X_train, y_train, X_test, y_test = load_fashion_mnist_data(no_training_samples, no_testing_samples)
 
